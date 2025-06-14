@@ -2,68 +2,36 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v5.3.0/css/ol.css"
-    type="text/css">
-  <style>
-    .map {
-      height: 400px;
-      width: 100%;
+  <title>XML file to JSON</title>
+  <script type="text/javascript" src="xml2json.js"></script>
+  <script type="text/javascript">
+    async function convertXML(event) {
+      const file = event.target.files.item(0)
+      const text = await file.text();
+
+      const parser = new DOMParser();
+      var xml =
+        parser.parseFromString(text, "text/xml");
+      var json = xml2json(xml, "");
+      var content = document.getElementById("output");
+      content.value = json;
     }
-  </style>
-  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v5.3.0/build/ol.js"></script>
-  <title>OpenLayers example</title>
+
+    function copyToClipBoard() {
+      var content = document.getElementById('output');
+      content.select();
+      document.execCommand('copy');
+      document.getElementById('info').value = "Copied!";
+    }
+  </script>
 </head>
 
 <body>
-  <h2>My Map</h2>
-  <div id="map" class="map"></div>
-  <script type="text/javascript">
-
-    const url = new URL(window.location.toLocaleString());
-    const apikey = url.searchParams.get('apikey');
-
-    const thunderforestLayer = new ol.layer.Tile({
-      source: new ol.source.OSM({
-        url:
-          'https://{a-c}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png' +
-          `?apikey=${apikey}`,
-      }),
-    });
-
-    var vectorSource = new ol.source.Vector({
-      url: 'https://sandigst.github.io/OpenLayersTest/test.gpx',
-      format: new ol.format.GPX()
-    });
-
-    var vectorLayer = new ol.layer.Vector({
-      source: vectorSource,
-      style: new ol.style.Style({
-        image: new ol.style.Circle({
-          radius: 2,
-          fill: new ol.style.Fill({ color: 'red' })
-        })
-      })
-    });
-
-    var map = new ol.Map({
-      layers: [
-        thunderforestLayer,
-        vectorLayer
-      ],
-      target: 'map',
-      view: new ol.View({
-        center: [0, 0],
-        zoom: 5
-      })
-    });
-
-    // fit when the source loads
-    vectorSource.on('addfeature', function () {
-      map.getView().fit(vectorSource.getExtent());
-    });
-
-    map.render();
-  </script>
+  <p>Using <a href="https://goessner.net/download/prj/jsonxml/">xml2json</a> by Stefan Goessner</p><br />
+  <input type="file" onchange="convertXML(event)" /><br />
+  <textarea id="output" rows="10" cols="100" disabled></textarea><br />
+  <button onclick="copyToClipBoard()">Copy</button>
+  <dev id="info"></dev>
 </body>
 
 </html>
