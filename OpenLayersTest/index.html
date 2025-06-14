@@ -16,15 +16,19 @@
 <div id="map" class="map"></div>
 <script type="text/javascript">
 
-
-	  var vector = new ol.layer.Vector({
-		source: new ol.source.Vector({
+var vectorSource = new ol.source.Vector({
 		  url: 'https://openlayers.org/en/v4.6.5/examples/data/gpx/fells_loop.gpx',
 		  format: new ol.format.GPX()
-		}),
-		style: function(feature) {
-		  return style[feature.getGeometry().getType()];
-		}
+		});
+
+	  var vectorLayer = new ol.layer.Vector({
+		source: vectorSource,
+		style: new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 2,
+            fill: new ol.style.Fill({color: 'red'})
+          })
+        })
       });	
 	  
       var map = new ol.Map({
@@ -32,7 +36,7 @@
           new ol.layer.Tile({
             source: new ol.source.OSM()
           }),
-		  vector
+		  vectorLayer
         ],
         target: 'map',
         view: new ol.View({
