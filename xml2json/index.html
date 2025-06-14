@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <head>
   <title>XML file to JSON</title>
+
   <script type="text/javascript" src="xml2json.js"></script>
   <script type="text/javascript">
     async function convertXML(event) {
@@ -29,12 +30,17 @@
 </head>
 
 <body>
-  <h1>XML file to JSON</h1>
-  <p>Using <a href="https://goessner.net/download/prj/jsonxml/">xml2json</a> by Stefan Goessner</p>
-  <input type="file" onchange="convertXML(event)" /><br />
-  <textarea id="output" rows="10" cols="50"></textarea><br />
-  <button onclick="copyToClipBoard()">Copy</button>
-  <p id="info"></p>
+  <header class="w3-container w3-card">
+    <h1>XML file to JSON</h1>
+  </header>
+
+  <div class="w3-container">
+    <p>Using <a href="https://goessner.net/download/prj/jsonxml/">xml2json</a> by Stefan Goessner</p><br>
+    <input class="w3-btn w3-blue" style="width:100%; text-align: left" type="file" onchange="convertXML(event)" /><br>
+    <textarea class="w3-panel" id="output" rows="10" style="width: 100%"></textarea><br>
+    <button class="w3-btn w3-blue" style="width:100%" onclick="copyToClipBoard()">Copy</button>
+    <p class="w3-panel w3-border" id="info">...</p>
+  </div>
 </body>
 
 </html>
