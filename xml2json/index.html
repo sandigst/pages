@@ -14,14 +14,14 @@
         parser.parseFromString(text, "text/xml");
       var json = xml2json(xml, "");
       var content = document.getElementById("output");
-      content.value = json;
+      content.innerText = json;
     }
 
     function copyToClipBoard() {
       var content = document.getElementById('output');
       content.select();
       document.execCommand('copy');
-      document.getElementById('info').value = "Copied!";
+      document.getElementById('info').innerText = "Copied!";
     }
   </script>
 </head>
@@ -29,7 +29,7 @@
 <body>
   <p>Using <a href="https://goessner.net/download/prj/jsonxml/">xml2json</a> by Stefan Goessner</p><br />
   <input type="file" onchange="convertXML(event)" /><br />
-  <textarea id="output" rows="10" cols="100" disabled></textarea><br />
+  <textarea id="output" rows="10" cols="100"></textarea><br />
   <button onclick="copyToClipBoard()">Copy</button>
   <dev id="info"></dev>
 </body>
