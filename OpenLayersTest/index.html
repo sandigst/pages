@@ -21,8 +21,8 @@
 
     const url = new URL(window.location.toLocaleString());
     const apikey = url.searchParams.get('apikey');
-    const fileId = url.searchParams.get('file');
-    const openCycleMapLayer = new ol.layer.Tile({
+
+    const thundeforestLayer = new ol.layer.Tile({
       source: new ol.source.OSM({
         url:
           'https://{a-c}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png' +
@@ -31,7 +31,7 @@
     });
 
     var vectorSource = new ol.source.Vector({
-      url: `https://drive.usercontent.google.com/download?id=${fileId}`,
+      url: 'test.gpx',
       format: new ol.format.GPX()
     });
 
@@ -47,7 +47,7 @@
 
     var map = new ol.Map({
       layers: [
-        openCycleMapLayer,
+        thundeforestLayer,
         vectorLayer
       ],
       target: 'map',
