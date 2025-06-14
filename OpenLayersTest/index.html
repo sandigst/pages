@@ -37,14 +37,8 @@
         })
       });
 
-      var headInnerImageStyle = new ol.style.Style({
-        image: new ol.style.Circle({
-          radius: 2,
-          fill: new ol.style.Fill({color: 'blue'})
-        })
-      });
 
-      var headOuterImageStyle = new ol.style.Style({
+      var headImageStyle = new ol.style.Style({
         image: new ol.style.Circle({
           radius: 5,
           fill: new ol.style.Fill({color: 'black'})
@@ -52,7 +46,7 @@
       });
 
 
-      var n = 200;
+      var n = 10;
       var omegaTheta = 30000; // Rotation period in ms
       var R = 7e6;
       var r = 2e6;
@@ -74,10 +68,7 @@
 
         var headPoint = new ol.geom.Point(coordinates[coordinates.length - 1]);
 
-        vectorContext.setStyle(headOuterImageStyle);
-        vectorContext.drawGeometry(headPoint);
-
-        vectorContext.setStyle(headInnerImageStyle);
+        vectorContext.setStyle(headImageStyle);
         vectorContext.drawGeometry(headPoint);
 
         map.render();
