@@ -4,20 +4,15 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <head>
-  <title>Convert XML File To JSON</title>
+  <title>Copy File Content</title>
 
-  <script type="text/javascript" src="xml2json.js"></script>
   <script type="text/javascript">
-    async function convertXML(event) {
+    async function readFileContent(event) {
       const file = event.target.files.item(0)
       const text = await file.text();
 
-      const parser = new DOMParser();
-      var xml =
-        parser.parseFromString(text, "text/xml");
-      var json = xml2json(xml, "");
       var output = document.getElementById("output");
-      output.value = json;
+      output.value = text;
     }
 
     function copyToClipBoard() {
@@ -31,16 +26,15 @@
 
 <body>
   <header class="w3-container w3-card">
-    <h1>Convert XML File To JSON</h1>
+    <h1>Copy File Content</h1>
   </header>
 
   <div class="w3-container">
-    <input class="w3-btn w3-blue" style="width:100%; text-align: left" type="file" onchange="convertXML(event)" /><br>
+    <input class="w3-btn w3-blue" style="width:100%; text-align: left" type="file"
+      onchange="readFileContent(event)" /><br>
     <textarea class="w3-panel" id="output" rows="10" style="width: 100%"></textarea><br>
     <button class="w3-btn w3-blue" style="width:100%" onclick="copyToClipBoard()">Copy</button>
     <p class="w3-panel w3-border" id="info">...</p>
-    <p>Using <a href="https://goessner.net/download/prj/jsonxml/">xml2json</a> under <a
-        href="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html">LGPL</a></p>
   </div>
 </body>
 
